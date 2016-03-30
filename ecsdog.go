@@ -132,8 +132,9 @@ func (s *Scraper) scrape(service *ecs.Service) error {
 				Text:           *event.Message,
 				Timestamp:      *event.CreatedAt,
 				AggregationKey: *service.ServiceName,
-				Tags:           tags,
+				Tags:           append(tags, "ecs"),
 			})
+			s.events[*event.Id] = true
 		}
 	}
 
