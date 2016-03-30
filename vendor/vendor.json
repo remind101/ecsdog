@@ -6,6 +6,178 @@
 			"path": "github.com/DataDog/datadog-go/statsd",
 			"revision": "b050cd8f4d7c394545fd7d966c8e2909ce89d552",
 			"revisionTime": "2015-09-30T16:07:41+02:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/aws",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/aws/awserr",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/aws/awsutil",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/aws/client",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/aws/client/metadata",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/aws/corehandlers",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/aws/credentials",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/aws/credentials/ec2rolecreds",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/aws/defaults",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/aws/ec2metadata",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/aws/request",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/aws/session",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/awstesting",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/awstesting/unit",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/private/endpoints",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/private/model/api",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/private/protocol/json/jsonutil",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/private/protocol/jsonrpc",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/private/protocol/query",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/private/protocol/query/queryutil",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/private/protocol/rest",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/private/protocol/restxml",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/private/protocol/xml/xmlutil",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/private/signer/v4",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/private/util",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/private/waiter",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/service/cloudfront",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/service/dynamodb",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/service/ecs",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/service/route53",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/service/s3",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"origin": "github.com/aws/aws-sdk-go/vendor/github.com/go-ini/ini",
+			"path": "github.com/go-ini/ini",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
+		},
+		{
+			"origin": "github.com/aws/aws-sdk-go/vendor/github.com/jmespath/go-jmespath",
+			"path": "github.com/jmespath/go-jmespath",
+			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
+			"revisionTime": "2015-11-23T19:39:42-08:00"
 		}
 	]
 }
