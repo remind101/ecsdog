@@ -2,6 +2,14 @@
 
 ECSDog is a standalone Go application that scrapes metrics and events from ECS, and sends them to statsd.
 
+## Usage
+
+The recommended usage is to run it with Docker (e.g. in an ECS service):
+
+```
+$ docker run remind101/ecsdog -cluster $CLUSTER -statsd "statsd:8125"
+```
+
 ## Metrics
 
 ```
