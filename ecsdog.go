@@ -18,6 +18,11 @@ var log = golog.New(os.Stderr, "", golog.LstdFlags)
 
 const DefaultNamespace = "aws.ecs"
 
+var (
+	scrapeInterval  = time.Second * 20
+	refreshInterval = time.Minute * 30
+)
+
 // Scraper scrapes metrics from ecs.
 type Scraper struct {
 	Cluster string
@@ -55,9 +60,13 @@ func (s *Scraper) Start() error {
 		return err
 	}
 
-	t := time.Tick(time.Second * 20)
+	go func() {
+		for range time.Tick(refreshInterval) {
+			s.updateServices()
+		}
+	}()
 
-	for range t {
+	for range time.Tick(scrapeInterval) {
 		if err := s.Scrape(); err != nil {
 			return err
 		}
