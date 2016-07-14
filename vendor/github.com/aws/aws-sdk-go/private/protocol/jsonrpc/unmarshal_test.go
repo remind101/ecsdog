@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"encoding/xml"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -16,10 +17,11 @@ import (
 	"github.com/aws/aws-sdk-go/aws/client/metadata"
 	"github.com/aws/aws-sdk-go/aws/request"
 	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/aws/signer/v4"
 	"github.com/aws/aws-sdk-go/awstesting"
+	"github.com/aws/aws-sdk-go/private/protocol"
 	"github.com/aws/aws-sdk-go/private/protocol/jsonrpc"
 	"github.com/aws/aws-sdk-go/private/protocol/xml/xmlutil"
-	"github.com/aws/aws-sdk-go/private/signer/v4"
 	"github.com/aws/aws-sdk-go/private/util"
 	"github.com/stretchr/testify/assert"
 )
@@ -30,12 +32,16 @@ var _ json.Marshaler
 var _ time.Time
 var _ xmlutil.XMLNode
 var _ xml.Attr
-var _ = awstesting.GenerateAssertions
 var _ = ioutil.Discard
 var _ = util.Trim("")
 var _ = url.Values{}
 var _ = io.EOF
 var _ = aws.String
+var _ = fmt.Println
+
+func init() {
+	protocol.RandReader = &awstesting.ZeroReader{}
+}
 
 //The service client's operations are safe to be used concurrently.
 // It is not safe to mutate any of the client's properties though.
@@ -76,11 +82,11 @@ func newOutputService1ProtocolTestClient(cfg aws.Config, handlers request.Handle
 	}
 
 	// Handlers
-	svc.Handlers.Sign.PushBack(v4.Sign)
-	svc.Handlers.Build.PushBack(jsonrpc.Build)
-	svc.Handlers.Unmarshal.PushBack(jsonrpc.Unmarshal)
-	svc.Handlers.UnmarshalMeta.PushBack(jsonrpc.UnmarshalMeta)
-	svc.Handlers.UnmarshalError.PushBack(jsonrpc.UnmarshalError)
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(jsonrpc.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(jsonrpc.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(jsonrpc.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(jsonrpc.UnmarshalErrorHandler)
 
 	return svc
 }
@@ -95,10 +101,32 @@ func (c *OutputService1ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opOutputService1TestCaseOperation1 = "OperationName"
 
-// OutputService1TestCaseOperation1Request generates a request for the OutputService1TestCaseOperation1 operation.
+// OutputService1TestCaseOperation1Request generates a "aws/request.Request" representing the
+// client's request for the OutputService1TestCaseOperation1 operation. The "output" return
+// value can be used to capture response data after the request's "Send" method
+// is called.
+//
+// Creating a request object using this method should be used when you want to inject
+// custom logic into the request's lifecycle using a custom handler, or if you want to
+// access properties on the request object before or after sending the request. If
+// you just want the service response, call the OutputService1TestCaseOperation1 method directly
+// instead.
+//
+// Note: You must call the "Send" method on the returned request object in order
+// to execute the request.
+//
+//    // Example sending a request using the OutputService1TestCaseOperation1Request method.
+//    req, resp := client.OutputService1TestCaseOperation1Request(params)
+//
+//    err := req.Send()
+//    if err == nil { // resp is now filled
+//        fmt.Println(resp)
+//    }
+//
 func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation1Request(input *OutputService1TestShapeOutputService1TestCaseOperation1Input) (req *request.Request, output *OutputService1TestShapeOutputService1TestCaseOperation1Output) {
 	op := &request.Operation{
-		Name: opOutputService1TestCaseOperation1,
+		Name:     opOutputService1TestCaseOperation1,
+		HTTPPath: "/",
 	}
 
 	if input == nil {
@@ -118,14 +146,12 @@ func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation1(input *Out
 }
 
 type OutputService1TestShapeOutputService1TestCaseOperation1Input struct {
-	metadataOutputService1TestShapeOutputService1TestCaseOperation1Input `json:"-" xml:"-"`
-}
-
-type metadataOutputService1TestShapeOutputService1TestCaseOperation1Input struct {
-	SDKShapeTraits bool `type:"structure"`
+	_ struct{} `type:"structure"`
 }
 
 type OutputService1TestShapeOutputService1TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+
 	Char *string `type:"character"`
 
 	Double *float64 `type:"double"`
@@ -141,12 +167,6 @@ type OutputService1TestShapeOutputService1TestCaseOperation1Output struct {
 	Str *string `type:"string"`
 
 	TrueBool *bool `type:"boolean"`
-
-	metadataOutputService1TestShapeOutputService1TestCaseOperation1Output `json:"-" xml:"-"`
-}
-
-type metadataOutputService1TestShapeOutputService1TestCaseOperation1Output struct {
-	SDKShapeTraits bool `type:"structure"`
 }
 
 //The service client's operations are safe to be used concurrently.
@@ -188,11 +208,11 @@ func newOutputService2ProtocolTestClient(cfg aws.Config, handlers request.Handle
 	}
 
 	// Handlers
-	svc.Handlers.Sign.PushBack(v4.Sign)
-	svc.Handlers.Build.PushBack(jsonrpc.Build)
-	svc.Handlers.Unmarshal.PushBack(jsonrpc.Unmarshal)
-	svc.Handlers.UnmarshalMeta.PushBack(jsonrpc.UnmarshalMeta)
-	svc.Handlers.UnmarshalError.PushBack(jsonrpc.UnmarshalError)
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(jsonrpc.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(jsonrpc.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(jsonrpc.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(jsonrpc.UnmarshalErrorHandler)
 
 	return svc
 }
@@ -207,10 +227,32 @@ func (c *OutputService2ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opOutputService2TestCaseOperation1 = "OperationName"
 
-// OutputService2TestCaseOperation1Request generates a request for the OutputService2TestCaseOperation1 operation.
+// OutputService2TestCaseOperation1Request generates a "aws/request.Request" representing the
+// client's request for the OutputService2TestCaseOperation1 operation. The "output" return
+// value can be used to capture response data after the request's "Send" method
+// is called.
+//
+// Creating a request object using this method should be used when you want to inject
+// custom logic into the request's lifecycle using a custom handler, or if you want to
+// access properties on the request object before or after sending the request. If
+// you just want the service response, call the OutputService2TestCaseOperation1 method directly
+// instead.
+//
+// Note: You must call the "Send" method on the returned request object in order
+// to execute the request.
+//
+//    // Example sending a request using the OutputService2TestCaseOperation1Request method.
+//    req, resp := client.OutputService2TestCaseOperation1Request(params)
+//
+//    err := req.Send()
+//    if err == nil { // resp is now filled
+//        fmt.Println(resp)
+//    }
+//
 func (c *OutputService2ProtocolTest) OutputService2TestCaseOperation1Request(input *OutputService2TestShapeOutputService2TestCaseOperation1Input) (req *request.Request, output *OutputService2TestShapeOutputService2TestCaseOperation1Output) {
 	op := &request.Operation{
-		Name: opOutputService2TestCaseOperation1,
+		Name:     opOutputService2TestCaseOperation1,
+		HTTPPath: "/",
 	}
 
 	if input == nil {
@@ -230,33 +272,23 @@ func (c *OutputService2ProtocolTest) OutputService2TestCaseOperation1(input *Out
 }
 
 type OutputService2TestShapeBlobContainer struct {
+	_ struct{} `type:"structure"`
+
+	// Foo is automatically base64 encoded/decoded by the SDK.
 	Foo []byte `locationName:"foo" type:"blob"`
-
-	metadataOutputService2TestShapeBlobContainer `json:"-" xml:"-"`
-}
-
-type metadataOutputService2TestShapeBlobContainer struct {
-	SDKShapeTraits bool `type:"structure"`
 }
 
 type OutputService2TestShapeOutputService2TestCaseOperation1Input struct {
-	metadataOutputService2TestShapeOutputService2TestCaseOperation1Input `json:"-" xml:"-"`
-}
-
-type metadataOutputService2TestShapeOutputService2TestCaseOperation1Input struct {
-	SDKShapeTraits bool `type:"structure"`
+	_ struct{} `type:"structure"`
 }
 
 type OutputService2TestShapeOutputService2TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+
+	// BlobMember is automatically base64 encoded/decoded by the SDK.
 	BlobMember []byte `type:"blob"`
 
 	StructMember *OutputService2TestShapeBlobContainer `type:"structure"`
-
-	metadataOutputService2TestShapeOutputService2TestCaseOperation1Output `json:"-" xml:"-"`
-}
-
-type metadataOutputService2TestShapeOutputService2TestCaseOperation1Output struct {
-	SDKShapeTraits bool `type:"structure"`
 }
 
 //The service client's operations are safe to be used concurrently.
@@ -298,11 +330,11 @@ func newOutputService3ProtocolTestClient(cfg aws.Config, handlers request.Handle
 	}
 
 	// Handlers
-	svc.Handlers.Sign.PushBack(v4.Sign)
-	svc.Handlers.Build.PushBack(jsonrpc.Build)
-	svc.Handlers.Unmarshal.PushBack(jsonrpc.Unmarshal)
-	svc.Handlers.UnmarshalMeta.PushBack(jsonrpc.UnmarshalMeta)
-	svc.Handlers.UnmarshalError.PushBack(jsonrpc.UnmarshalError)
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(jsonrpc.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(jsonrpc.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(jsonrpc.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(jsonrpc.UnmarshalErrorHandler)
 
 	return svc
 }
@@ -317,10 +349,32 @@ func (c *OutputService3ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opOutputService3TestCaseOperation1 = "OperationName"
 
-// OutputService3TestCaseOperation1Request generates a request for the OutputService3TestCaseOperation1 operation.
+// OutputService3TestCaseOperation1Request generates a "aws/request.Request" representing the
+// client's request for the OutputService3TestCaseOperation1 operation. The "output" return
+// value can be used to capture response data after the request's "Send" method
+// is called.
+//
+// Creating a request object using this method should be used when you want to inject
+// custom logic into the request's lifecycle using a custom handler, or if you want to
+// access properties on the request object before or after sending the request. If
+// you just want the service response, call the OutputService3TestCaseOperation1 method directly
+// instead.
+//
+// Note: You must call the "Send" method on the returned request object in order
+// to execute the request.
+//
+//    // Example sending a request using the OutputService3TestCaseOperation1Request method.
+//    req, resp := client.OutputService3TestCaseOperation1Request(params)
+//
+//    err := req.Send()
+//    if err == nil { // resp is now filled
+//        fmt.Println(resp)
+//    }
+//
 func (c *OutputService3ProtocolTest) OutputService3TestCaseOperation1Request(input *OutputService3TestShapeOutputService3TestCaseOperation1Input) (req *request.Request, output *OutputService3TestShapeOutputService3TestCaseOperation1Output) {
 	op := &request.Operation{
-		Name: opOutputService3TestCaseOperation1,
+		Name:     opOutputService3TestCaseOperation1,
+		HTTPPath: "/",
 	}
 
 	if input == nil {
@@ -340,33 +394,21 @@ func (c *OutputService3ProtocolTest) OutputService3TestCaseOperation1(input *Out
 }
 
 type OutputService3TestShapeOutputService3TestCaseOperation1Input struct {
-	metadataOutputService3TestShapeOutputService3TestCaseOperation1Input `json:"-" xml:"-"`
-}
-
-type metadataOutputService3TestShapeOutputService3TestCaseOperation1Input struct {
-	SDKShapeTraits bool `type:"structure"`
+	_ struct{} `type:"structure"`
 }
 
 type OutputService3TestShapeOutputService3TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+
 	StructMember *OutputService3TestShapeTimeContainer `type:"structure"`
 
 	TimeMember *time.Time `type:"timestamp" timestampFormat:"unix"`
-
-	metadataOutputService3TestShapeOutputService3TestCaseOperation1Output `json:"-" xml:"-"`
-}
-
-type metadataOutputService3TestShapeOutputService3TestCaseOperation1Output struct {
-	SDKShapeTraits bool `type:"structure"`
 }
 
 type OutputService3TestShapeTimeContainer struct {
+	_ struct{} `type:"structure"`
+
 	Foo *time.Time `locationName:"foo" type:"timestamp" timestampFormat:"unix"`
-
-	metadataOutputService3TestShapeTimeContainer `json:"-" xml:"-"`
-}
-
-type metadataOutputService3TestShapeTimeContainer struct {
-	SDKShapeTraits bool `type:"structure"`
 }
 
 //The service client's operations are safe to be used concurrently.
@@ -408,11 +450,11 @@ func newOutputService4ProtocolTestClient(cfg aws.Config, handlers request.Handle
 	}
 
 	// Handlers
-	svc.Handlers.Sign.PushBack(v4.Sign)
-	svc.Handlers.Build.PushBack(jsonrpc.Build)
-	svc.Handlers.Unmarshal.PushBack(jsonrpc.Unmarshal)
-	svc.Handlers.UnmarshalMeta.PushBack(jsonrpc.UnmarshalMeta)
-	svc.Handlers.UnmarshalError.PushBack(jsonrpc.UnmarshalError)
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(jsonrpc.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(jsonrpc.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(jsonrpc.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(jsonrpc.UnmarshalErrorHandler)
 
 	return svc
 }
@@ -427,10 +469,32 @@ func (c *OutputService4ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opOutputService4TestCaseOperation1 = "OperationName"
 
-// OutputService4TestCaseOperation1Request generates a request for the OutputService4TestCaseOperation1 operation.
+// OutputService4TestCaseOperation1Request generates a "aws/request.Request" representing the
+// client's request for the OutputService4TestCaseOperation1 operation. The "output" return
+// value can be used to capture response data after the request's "Send" method
+// is called.
+//
+// Creating a request object using this method should be used when you want to inject
+// custom logic into the request's lifecycle using a custom handler, or if you want to
+// access properties on the request object before or after sending the request. If
+// you just want the service response, call the OutputService4TestCaseOperation1 method directly
+// instead.
+//
+// Note: You must call the "Send" method on the returned request object in order
+// to execute the request.
+//
+//    // Example sending a request using the OutputService4TestCaseOperation1Request method.
+//    req, resp := client.OutputService4TestCaseOperation1Request(params)
+//
+//    err := req.Send()
+//    if err == nil { // resp is now filled
+//        fmt.Println(resp)
+//    }
+//
 func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation1Request(input *OutputService4TestShapeOutputService4TestCaseOperation1Input) (req *request.Request, output *OutputService4TestShapeOutputShape) {
 	op := &request.Operation{
-		Name: opOutputService4TestCaseOperation1,
+		Name:     opOutputService4TestCaseOperation1,
+		HTTPPath: "/",
 	}
 
 	if input == nil {
@@ -451,10 +515,32 @@ func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation1(input *Out
 
 const opOutputService4TestCaseOperation2 = "OperationName"
 
-// OutputService4TestCaseOperation2Request generates a request for the OutputService4TestCaseOperation2 operation.
+// OutputService4TestCaseOperation2Request generates a "aws/request.Request" representing the
+// client's request for the OutputService4TestCaseOperation2 operation. The "output" return
+// value can be used to capture response data after the request's "Send" method
+// is called.
+//
+// Creating a request object using this method should be used when you want to inject
+// custom logic into the request's lifecycle using a custom handler, or if you want to
+// access properties on the request object before or after sending the request. If
+// you just want the service response, call the OutputService4TestCaseOperation2 method directly
+// instead.
+//
+// Note: You must call the "Send" method on the returned request object in order
+// to execute the request.
+//
+//    // Example sending a request using the OutputService4TestCaseOperation2Request method.
+//    req, resp := client.OutputService4TestCaseOperation2Request(params)
+//
+//    err := req.Send()
+//    if err == nil { // resp is now filled
+//        fmt.Println(resp)
+//    }
+//
 func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation2Request(input *OutputService4TestShapeOutputService4TestCaseOperation2Input) (req *request.Request, output *OutputService4TestShapeOutputShape) {
 	op := &request.Operation{
-		Name: opOutputService4TestCaseOperation2,
+		Name:     opOutputService4TestCaseOperation2,
+		HTTPPath: "/",
 	}
 
 	if input == nil {
@@ -474,41 +560,25 @@ func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation2(input *Out
 }
 
 type OutputService4TestShapeOutputService4TestCaseOperation1Input struct {
-	metadataOutputService4TestShapeOutputService4TestCaseOperation1Input `json:"-" xml:"-"`
-}
-
-type metadataOutputService4TestShapeOutputService4TestCaseOperation1Input struct {
-	SDKShapeTraits bool `type:"structure"`
+	_ struct{} `type:"structure"`
 }
 
 type OutputService4TestShapeOutputService4TestCaseOperation2Input struct {
-	metadataOutputService4TestShapeOutputService4TestCaseOperation2Input `json:"-" xml:"-"`
-}
-
-type metadataOutputService4TestShapeOutputService4TestCaseOperation2Input struct {
-	SDKShapeTraits bool `type:"structure"`
+	_ struct{} `type:"structure"`
 }
 
 type OutputService4TestShapeOutputShape struct {
+	_ struct{} `type:"structure"`
+
 	ListMember []*string `type:"list"`
 
 	ListMemberMap []map[string]*string `type:"list"`
 
 	ListMemberStruct []*OutputService4TestShapeStructType `type:"list"`
-
-	metadataOutputService4TestShapeOutputShape `json:"-" xml:"-"`
-}
-
-type metadataOutputService4TestShapeOutputShape struct {
-	SDKShapeTraits bool `type:"structure"`
 }
 
 type OutputService4TestShapeStructType struct {
-	metadataOutputService4TestShapeStructType `json:"-" xml:"-"`
-}
-
-type metadataOutputService4TestShapeStructType struct {
-	SDKShapeTraits bool `type:"structure"`
+	_ struct{} `type:"structure"`
 }
 
 //The service client's operations are safe to be used concurrently.
@@ -550,11 +620,11 @@ func newOutputService5ProtocolTestClient(cfg aws.Config, handlers request.Handle
 	}
 
 	// Handlers
-	svc.Handlers.Sign.PushBack(v4.Sign)
-	svc.Handlers.Build.PushBack(jsonrpc.Build)
-	svc.Handlers.Unmarshal.PushBack(jsonrpc.Unmarshal)
-	svc.Handlers.UnmarshalMeta.PushBack(jsonrpc.UnmarshalMeta)
-	svc.Handlers.UnmarshalError.PushBack(jsonrpc.UnmarshalError)
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(jsonrpc.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(jsonrpc.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(jsonrpc.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(jsonrpc.UnmarshalErrorHandler)
 
 	return svc
 }
@@ -569,10 +639,32 @@ func (c *OutputService5ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opOutputService5TestCaseOperation1 = "OperationName"
 
-// OutputService5TestCaseOperation1Request generates a request for the OutputService5TestCaseOperation1 operation.
+// OutputService5TestCaseOperation1Request generates a "aws/request.Request" representing the
+// client's request for the OutputService5TestCaseOperation1 operation. The "output" return
+// value can be used to capture response data after the request's "Send" method
+// is called.
+//
+// Creating a request object using this method should be used when you want to inject
+// custom logic into the request's lifecycle using a custom handler, or if you want to
+// access properties on the request object before or after sending the request. If
+// you just want the service response, call the OutputService5TestCaseOperation1 method directly
+// instead.
+//
+// Note: You must call the "Send" method on the returned request object in order
+// to execute the request.
+//
+//    // Example sending a request using the OutputService5TestCaseOperation1Request method.
+//    req, resp := client.OutputService5TestCaseOperation1Request(params)
+//
+//    err := req.Send()
+//    if err == nil { // resp is now filled
+//        fmt.Println(resp)
+//    }
+//
 func (c *OutputService5ProtocolTest) OutputService5TestCaseOperation1Request(input *OutputService5TestShapeOutputService5TestCaseOperation1Input) (req *request.Request, output *OutputService5TestShapeOutputService5TestCaseOperation1Output) {
 	op := &request.Operation{
-		Name: opOutputService5TestCaseOperation1,
+		Name:     opOutputService5TestCaseOperation1,
+		HTTPPath: "/",
 	}
 
 	if input == nil {
@@ -592,21 +684,13 @@ func (c *OutputService5ProtocolTest) OutputService5TestCaseOperation1(input *Out
 }
 
 type OutputService5TestShapeOutputService5TestCaseOperation1Input struct {
-	metadataOutputService5TestShapeOutputService5TestCaseOperation1Input `json:"-" xml:"-"`
-}
-
-type metadataOutputService5TestShapeOutputService5TestCaseOperation1Input struct {
-	SDKShapeTraits bool `type:"structure"`
+	_ struct{} `type:"structure"`
 }
 
 type OutputService5TestShapeOutputService5TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+
 	MapMember map[string][]*int64 `type:"map"`
-
-	metadataOutputService5TestShapeOutputService5TestCaseOperation1Output `json:"-" xml:"-"`
-}
-
-type metadataOutputService5TestShapeOutputService5TestCaseOperation1Output struct {
-	SDKShapeTraits bool `type:"structure"`
 }
 
 //The service client's operations are safe to be used concurrently.
@@ -648,11 +732,11 @@ func newOutputService6ProtocolTestClient(cfg aws.Config, handlers request.Handle
 	}
 
 	// Handlers
-	svc.Handlers.Sign.PushBack(v4.Sign)
-	svc.Handlers.Build.PushBack(jsonrpc.Build)
-	svc.Handlers.Unmarshal.PushBack(jsonrpc.Unmarshal)
-	svc.Handlers.UnmarshalMeta.PushBack(jsonrpc.UnmarshalMeta)
-	svc.Handlers.UnmarshalError.PushBack(jsonrpc.UnmarshalError)
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(jsonrpc.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(jsonrpc.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(jsonrpc.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(jsonrpc.UnmarshalErrorHandler)
 
 	return svc
 }
@@ -667,10 +751,32 @@ func (c *OutputService6ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opOutputService6TestCaseOperation1 = "OperationName"
 
-// OutputService6TestCaseOperation1Request generates a request for the OutputService6TestCaseOperation1 operation.
+// OutputService6TestCaseOperation1Request generates a "aws/request.Request" representing the
+// client's request for the OutputService6TestCaseOperation1 operation. The "output" return
+// value can be used to capture response data after the request's "Send" method
+// is called.
+//
+// Creating a request object using this method should be used when you want to inject
+// custom logic into the request's lifecycle using a custom handler, or if you want to
+// access properties on the request object before or after sending the request. If
+// you just want the service response, call the OutputService6TestCaseOperation1 method directly
+// instead.
+//
+// Note: You must call the "Send" method on the returned request object in order
+// to execute the request.
+//
+//    // Example sending a request using the OutputService6TestCaseOperation1Request method.
+//    req, resp := client.OutputService6TestCaseOperation1Request(params)
+//
+//    err := req.Send()
+//    if err == nil { // resp is now filled
+//        fmt.Println(resp)
+//    }
+//
 func (c *OutputService6ProtocolTest) OutputService6TestCaseOperation1Request(input *OutputService6TestShapeOutputService6TestCaseOperation1Input) (req *request.Request, output *OutputService6TestShapeOutputService6TestCaseOperation1Output) {
 	op := &request.Operation{
-		Name: opOutputService6TestCaseOperation1,
+		Name:     opOutputService6TestCaseOperation1,
+		HTTPPath: "/",
 	}
 
 	if input == nil {
@@ -690,21 +796,13 @@ func (c *OutputService6ProtocolTest) OutputService6TestCaseOperation1(input *Out
 }
 
 type OutputService6TestShapeOutputService6TestCaseOperation1Input struct {
-	metadataOutputService6TestShapeOutputService6TestCaseOperation1Input `json:"-" xml:"-"`
-}
-
-type metadataOutputService6TestShapeOutputService6TestCaseOperation1Input struct {
-	SDKShapeTraits bool `type:"structure"`
+	_ struct{} `type:"structure"`
 }
 
 type OutputService6TestShapeOutputService6TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+
 	StrType *string `type:"string"`
-
-	metadataOutputService6TestShapeOutputService6TestCaseOperation1Output `json:"-" xml:"-"`
-}
-
-type metadataOutputService6TestShapeOutputService6TestCaseOperation1Output struct {
-	SDKShapeTraits bool `type:"structure"`
 }
 
 //
